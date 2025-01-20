@@ -1,0 +1,20 @@
+return function(Vargs)
+	local server, service = Vargs.Server, Vargs.Service
+
+	server.Commands.PlayerSit = {
+		Prefix = server.Settings.Prefix;	-- Prefix to use for command
+		Commands = {"sit"};	-- Commands
+		Args = {""};	-- Command arguments
+		Description = "Sits the player's character";	-- Command Description
+		Hidden = false; -- Is it hidden from the command list?
+		Fun = true;	-- Is it fun?
+		AdminLevel = "Players";	    -- Admin level; If using settings.CustomRanks set this to the custom rank name (eg. "Baristas")
+		Function = function(plr:Player,args)    -- Function to run for command
+			local character = plr.Character or plr.CharacterAdded:Wait()
+			local humanoid = character:FindFirstChildOfClass("Humanoid")
+			if character and humanoid then
+				humanoid.Sit = true
+			end
+		end
+	}
+end
